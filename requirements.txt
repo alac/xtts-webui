@@ -1,8 +1,10 @@
-gradio==4.13.0
-torch
-torchaudio
-faster_whisper==0.10.0
-tts>=0.22.0
+gradio==4.43.0
+torch==2.1.1
+torchaudio==2.1.1
+faster-whisper==1.0.1
+coqui-tts[languages]==0.24.2
+pypinyin
+hangul_romanize
 langid
 noisereduce
 pedalboard
@@ -21,4 +23,10 @@ pyworld
 torchcrepe
 praat-parselmouth>=0.4.2
 translators
+spacy>=3.2.0
 transformers==4.36.2
+deepl
+requests
+pysubs2
+whisperx
+silero-tts

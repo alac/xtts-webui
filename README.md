@@ -1,5 +1,18 @@
 # XTTS-WebUI
 
+## Portable version
+
+The project now has a portable version, so you don't have to go to the trouble of installing all the dependencies.
+
+[Click here to download](https://huggingface.co/daswer123/xtts_portable/resolve/main/xtts-webui-v1_0-portable.zip?download=true)
+
+You don't need anything but Windows and an Nvidia graphics card with 6 GB of video memory to run it.
+
+## The Train tab is broken, if you want to train a model use a separate webui
+## [xtts-finetune-webui](https://github.com/daswer123/xtts-finetune-webui)
+
+## Readme is available in the following languages
+
 [English](https://github.com/daswer123/xtts-webui/blob/main/README.md)
 
 [Russian](https://github.com/daswer123/xtts-webui/blob/main/README_ru_RU.md)
@@ -136,3 +149,5 @@ In order for the model to work in RVC settings you need to select a model that y
 2. Removed the display of logs as it was causing problems when restarted
 3. The finished result is copied to the ready folder, these are fully finished files, you can move them anywhere and use them as a standard model
 4. Added support for Japanese [here](https://github.com/daswer123/xtts-webui/issues/15#issuecomment-1869090189)
+
+This project is tested with BrowserStack

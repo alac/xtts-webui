@@ -13,7 +13,6 @@ from xtts_webui import *
 # FUNCS
 # SPEAKERS LIST FUNCS
 
-
 def update_speakers_list(speakers_list, speaker_value_text, speaker_path_text, speaker_ref_wavs):
     speakers_list = XTTS.get_speakers()
     speaker_value = ""
@@ -177,8 +176,24 @@ def clear_multiple_reference(ref_speaker):
     return None, "", speaker_value, gr.Dropdown(label="Reference Speaker from folder 'speakers'", value=speaker_value, choices=speakers_list), gr.Button(visible=False)
 
 
+def show_inbuild_voices(show_inbuildstudio_speaker):
+    speakers_list = XTTS.get_speakers(True)
+    speaker_value = ""
+    
+    if not speakers_list:
+        speakers_list = ["None"]
+        speaker_value = "None"
+    else:
+        speaker_value = speakers_list[0]
+        XTTS.speaker_wav = speaker_value
+                        
+    return gr.Dropdown(label=i18n("Reference Speaker from folder 'speakers'"), value=speaker_value, choices=speakers_list)
+
+
 # HANDLERS
 # REFERENCE LIST
+show_inbuildstudio_speaker.change(fn=show_inbuild_voices,inputs=[show_inbuildstudio_speaker],outputs=[ref_speaker_list])
+
 ref_speaker_list.change(fn=change_current_speaker,
                         inputs=[ref_speaker_list, speaker_value_text,
                                 show_ref_speaker_from_list],
@@ -193,6 +208,23 @@ show_ref_speaker_from_list.change(fn=switch_speaker_example_visibility,
                                   inputs=[ref_speaker_example, show_ref_speaker_from_list,
                                           ref_speaker_list, speaker_value_text],
                                   outputs=[ref_speaker_example])
+
+# Translate Ref list
+# REFERENCE LIST
+translate_ref_speaker_list.change(fn=change_current_speaker,
+                        inputs=[translate_ref_speaker_list, speaker_value_text,
+                                translate_show_ref_speaker_from_list],
+                        outputs=[translate_ref_speaker_list, speaker_value_text, translate_ref_speaker_example])
+
+translate_update_ref_speaker_list_btn.click(fn=update_speakers_list,
+                                  inputs=[translate_ref_speaker_list, speaker_value_text,
+                                          speaker_path_text, speaker_ref_wavs],
+                                  outputs=[translate_ref_speaker_list, speaker_value_text])
+
+translate_show_ref_speaker_from_list.change(fn=switch_speaker_example_visibility,
+                                  inputs=[translate_ref_speaker_example, translate_show_ref_speaker_from_list,
+                                          translate_ref_speaker_list, speaker_value_text],
+                                  outputs=[translate_ref_speaker_example])
 
 # REFERENCE SINGLE UPLOAD OR MICROPHONE
 ref_speaker.stop_recording(fn=change_current_speaker_audio,
