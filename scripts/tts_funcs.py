@@ -388,6 +388,7 @@ class TTSWrapper:
                 # Only a filename was provided; prepend with output folder.
                 output_file = os.path.join(
                     self.output_folder, file_name_or_path)
+            output_file = fix_path_separators(output_file)
 
             # Replace double quotes with single, asterisks, carriage returns, and line feeds
             clear_text = self.clean_text(text)
@@ -411,6 +412,20 @@ class TTSWrapper:
 
         except Exception as e:
             raise e  # Propagate exceptions for endpoint handling.
+
+
+def fix_path_separators(path):
+  """Fixes paths with mixed separators by replacing all separators with the OS-specific separator.
+
+  Args:
+    path: The path string to fix.
+
+  Returns:
+    The fixed path string with consistent separators.
+  """
+
+  # Replace all occurrences of both forward slash and Japanese Yen symbol with os.sep
+  return path.replace('/', os.sep).replace('¥', os.sep) 
 
 
 if __name__ == "__main__":

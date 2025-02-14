@@ -145,7 +145,7 @@ def generate_audio(
         else:
             tqdm_object = tqdm(batch_generation)
 
-        batch_dirname = f"output/batch_"+datetime.now().strftime("%Y%m%d_%H%M%S")
+        batch_dirname = os.path.join("output", f"batch_"+datetime.now().strftime("%Y%m%d_%H%M%S"))
         os.makedirs(batch_dirname, exist_ok=True)
         status_message = f"Done, generation saved in {batch_dirname}"
 
